@@ -29,3 +29,7 @@ public/*.PNG
 public/*.jpg
 public/*.jpeg
 public/*.svg
+
+# Environment variables
+.env
+.env.*
