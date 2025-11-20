@@ -17,7 +17,7 @@ const About = () => {
                         marginBottom: '1.5rem',
                         border: '1px solid rgba(255, 255, 255, 0.1)'
                     }}>
-                        <span style={{ color: '#fbbf24', fontSize: '0.6rem' }}>●</span>
+                        <span style={{ color: '#ff4d4d', fontSize: '0.6rem' }}>●</span>
                         <span style={{ color: '#a3a3a3', fontSize: '0.8rem', fontWeight: '500' }}>About us</span>
                     </div>
                     <h2 style={{
@@ -164,8 +164,8 @@ const About = () => {
                             }}
                                 onMouseOver={(e) => {
                                     e.target.style.background = '#111';
-                                    e.target.style.borderColor = '#FFD700';
-                                    e.target.style.color = '#FFD700';
+                                    e.target.style.borderColor = '#ff4d4d';
+                                    e.target.style.color = '#ff4d4d';
                                 }}
                                 onMouseOut={(e) => {
                                     e.target.style.background = '#111';

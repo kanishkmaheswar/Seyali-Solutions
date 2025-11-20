@@ -50,7 +50,7 @@ const Industries = () => {
                             marginBottom: '1.5rem',
                             border: '1px solid rgba(255, 255, 255, 0.1)'
                         }}>
-                            <span style={{ color: '#fbbf24', fontSize: '0.6rem' }}>●</span>
+                            <span style={{ color: '#ff4d4d', fontSize: '0.6rem' }}>●</span>
                             <span style={{ color: '#a3a3a3', fontSize: '0.8rem', fontWeight: '500' }}>Industries</span>
                         </div>
 
@@ -97,7 +97,7 @@ const Industries = () => {
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         marginBottom: '1.5rem',
-                                        color: 'white',
+                                        color: '#ff4d4d',
                                         border: '1px solid #222'
                                     }}>
                                         {service.icon}

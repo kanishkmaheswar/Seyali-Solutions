@@ -1,7 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Spline from '@splinetool/react-spline';
 
 const Hero = () => {
+
+    const words = ["Artificial Intelligence", "Machine Learning", "Data Science"];
+    const [index, setIndex] = useState(0);
+    const [subIndex, setSubIndex] = useState(0);
+    const [deleting, setDeleting] = useState(false);
+    const [blink, setBlink] = useState(true);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setSubIndex(prev => {
+                if (!deleting && prev === words[index].length) {
+                    setDeleting(true);
+                    return prev;
+                }
+
+                if (deleting && prev === 0) {
+                    setDeleting(false);
+                    setIndex(prevIndex => (prevIndex + 1) % words.length);
+                    return 0;
+                }
+
+                return prev + (deleting ? -1 : 1);
+            });
+        }, deleting ? 80 : 150);
+
+        return () => clearTimeout(timeout);
+    }, [subIndex, deleting, index]);
+
+    useEffect(() => {
+        const blinkInterval = setInterval(() => {
+            setBlink(prev => !prev);
+        }, 500);
+        return () => clearInterval(blinkInterval);
+    }, []);
+
     return (
         <section id="home" style={{
             position: 'relative',
@@ -13,7 +48,8 @@ const Hero = () => {
             justifyContent: 'center',
             background: '#000000'
         }}>
-            {/* Floating Dots/Particles */}
+
+            {/* Floating dots */}
             <div style={{
                 position: 'absolute',
                 inset: 0,
@@ -24,7 +60,7 @@ const Hero = () => {
                 zIndex: 0
             }}></div>
 
-            {/* Radial Lines from Center */}
+            {/* Radial lines */}
             <div style={{
                 position: 'absolute',
                 top: '50%',
@@ -33,21 +69,21 @@ const Hero = () => {
                 width: '120000px',
                 height: '120000px',
                 background: `
-                    repeating-conic-gradient(
-                        from 0deg,
-                        transparent 0deg,
-                        transparent 5deg,
-                        rgba(66, 96, 144, 0.28) 5deg,
-                        rgba(61, 86, 125, 0.15) 5.5deg
-                    )
-                `,
+                        repeating-conic-gradient(
+                            from 0deg,
+                            transparent 0deg,
+                            transparent 5deg,
+                            rgba(66, 96, 144, 0.28) 5deg,
+                            rgba(61, 86, 125, 0.15) 5.5deg
+                        )
+                    `,
                 borderRadius: '50%',
                 opacity: 0.4,
                 pointerEvents: 'none',
                 zIndex: 0
             }}></div>
 
-            {/* Subtle Corner Accents */}
+            {/* Corner accents */}
             <div style={{
                 position: 'absolute',
                 top: '20%',
@@ -87,7 +123,7 @@ const Hero = () => {
                 gap: '2rem'
             }}>
 
-                {/* Left Column: Text */}
+                {/* Left column */}
                 <div style={{
                     flex: 1,
                     display: 'flex',
@@ -97,6 +133,7 @@ const Hero = () => {
                     marginLeft: '-50px',
                     marginRight: '100px'
                 }}>
+
                     {/* Badge */}
                     <div style={{
                         display: 'inline-flex',
@@ -109,22 +146,26 @@ const Hero = () => {
                         marginBottom: '2rem',
                         backdropFilter: 'blur(10px)'
                     }}>
-                        <span style={{ color: '#fbbf24', fontSize: '0.8rem' }}>●</span>
+                        <span style={{ color: '#ff4d4d', fontSize: '0.8rem' }}>●</span>
                         <span style={{ color: '#e5e5e5', fontSize: '0.9rem', fontWeight: '500', letterSpacing: '0.5px' }}>Unlock the power of AI & ML</span>
-                        <span style={{ color: '#fbbf24', fontSize: '0.8rem' }}>●</span>
+                        <span style={{ color: '#ff4d4d', fontSize: '0.8rem' }}>●</span>
                     </div>
 
-                    {/* Headline */}
+                    {/* Headline with Typewriter */}
                     <h1 style={{
-                        fontSize: '3.5rem',
+                        fontSize: '3.4rem',
                         fontWeight: '700',
                         color: 'white',
                         lineHeight: '1.1',
                         marginBottom: '1.5rem',
                         letterSpacing: '-0.02em',
-                        maxWidth: '900px'
+                        maxWidth: '1200px'
                     }}>
-                        Access the full power of AI
+                        Access the full power of{" "}
+                        <span style={{ color: '#FFD700' }}>
+                            {words[index].substring(0, subIndex)}
+                            {blink ? "|" : ""}
+                        </span>
                     </h1>
 
                     {/* Subheadline */}
@@ -135,10 +176,10 @@ const Hero = () => {
                         lineHeight: '1.6',
                         marginBottom: '3rem'
                     }}>
-                        Experience the pinnacle of efficiency in data processing with AI. Our ground-breaking tech opens unlimited potential across a range of industries.
+                        Experience the pinnacle of efficiency in data processing with AI. Our groundbreaking tech opens unlimited potential across a range of industries.
                     </p>
 
-                    {/* CTA Button */}
+                    {/* CTA */}
                     <a href="#contact" style={{
                         display: 'inline-flex',
                         alignItems: 'center',
@@ -153,13 +194,11 @@ const Hero = () => {
                         transition: 'all 0.3s ease'
                     }}
                         onMouseOver={(e) => {
-                            e.currentTarget.style.background = '#111';
-                            e.currentTarget.style.borderColor = '#FFD700';
-                            e.currentTarget.style.color = '#FFD700';
+                            e.currentTarget.style.borderColor = '#ff4d4d';
+                            e.currentTarget.style.color = '#ff4d4d';
                             e.currentTarget.style.transform = 'translateY(-2px)';
                         }}
                         onMouseOut={(e) => {
-                            e.currentTarget.style.background = '#111';
                             e.currentTarget.style.borderColor = '#333';
                             e.currentTarget.style.color = 'white';
                             e.currentTarget.style.transform = 'translateY(0)';
@@ -169,7 +208,7 @@ const Hero = () => {
                     </a>
                 </div>
 
-                {/* Right Column: Spline */}
+                {/* Right column */}
                 <div style={{
                     flex: 1,
                     height: '1200px',
@@ -183,7 +222,7 @@ const Hero = () => {
 
             </div>
 
-            {/* Scroll Down Arrow */}
+            {/* Scroll arrow */}
             <div style={{
                 position: 'absolute',
                 bottom: '2rem',
@@ -193,14 +232,16 @@ const Hero = () => {
                 cursor: 'pointer'
             }} className="animate-bounce">
                 <a href="#about" aria-label="Scroll down" style={{ color: 'white', opacity: 0.7, display: 'block' }}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                        strokeLinejoin="round">
                         <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
                     </svg>
                 </a>
             </div>
 
+            {/* Styles */}
             <style>{`
-                /* Make Spline canvas background transparent */
                 #home canvas {
                     background: transparent !important;
                     transform: scale(2.5);
@@ -229,6 +270,7 @@ const Hero = () => {
                         font-size: 0.95rem !important;
                     }
                 }
+
                 @media (max-width: 480px) {
                     #home h1 {
                         font-size: 2rem !important;
@@ -238,6 +280,7 @@ const Hero = () => {
                     }
                 }
             `}</style>
+
         </section>
     );
 };

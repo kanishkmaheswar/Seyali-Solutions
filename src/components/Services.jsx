@@ -37,7 +37,7 @@ const Services = () => {
                         marginBottom: '1.5rem',
                         border: '1px solid rgba(255, 255, 255, 0.1)'
                     }}>
-                        <span style={{ color: '#fbbf24', fontSize: '0.6rem' }}>●</span>
+                        <span style={{ color: '#ff4d4d', fontSize: '0.6rem' }}>●</span>
                         <span style={{ color: '#a3a3a3', fontSize: '0.8rem', fontWeight: '500' }}>Our services</span>
                     </div>
                     <h2 style={{
@@ -182,7 +182,7 @@ const Services = () => {
                                         top: 0,
                                         bottom: 0,
                                         width: '3px',
-                                        background: '#fbbf24'
+                                        background: '#ff4d4d'
                                     }}></div>
                                 )}
 
@@ -190,7 +190,7 @@ const Services = () => {
                                     <div style={{
                                         width: '8px',
                                         height: '8px',
-                                        background: '#fbbf24',
+                                        background: '#ff4d4d',
                                         borderRadius: '50%',
                                         marginTop: '0.5rem',
                                         flexShrink: 0

@@ -42,19 +42,11 @@ const Navbar = () => {
                     pointerEvents: scrolled ? 'none' : 'auto',
                     transition: 'opacity 0.3s ease'
                 }}>
-                    <div style={{
-                        width: '24px',
-                        height: '24px',
-                        background: 'white',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderRadius: '4px'
-                    }}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M12 5v14M5 12h14" />
-                        </svg>
-                    </div>
+                    <img src="/logo.png" alt="Seyali Solutions Logo" style={{
+                        width: '32px',
+                        height: '32px',
+                        objectFit: 'contain'
+                    }} />
                     <span style={{
                         fontSize: '1.1rem',
                         fontWeight: '600',
@@ -141,9 +133,9 @@ const Navbar = () => {
                     pointerEvents: scrolled ? 'none' : 'auto'
                 }} className="desktop-contact-btn"
                     onMouseOver={(e) => {
-                        e.target.style.borderColor = '#FFD700';
+                        e.target.style.borderColor = '#ff4d4d';
                         e.target.style.background = 'rgba(255,255,255,0.05)';
-                        e.target.style.color = '#FFD700';
+                        e.target.style.color = '#ff4d4d';
                     }}
                     onMouseOut={(e) => {
                         e.target.style.borderColor = 'rgba(255,255,255,0.1)';
@@ -186,8 +178,8 @@ const Navbar = () => {
                             background: 'rgba(255, 255, 255, 0.05)'
                         }}
                         onMouseOver={(e) => {
-                            e.target.style.color = '#FFD700';
-                            e.target.style.background = 'rgba(255, 215, 0, 0.1)';
+                            e.target.style.color = '#ff4d4d';
+                            e.target.style.background = 'rgba(255, 77, 77, 0.1)';
                         }}
                         onMouseOut={(e) => {
                             e.target.style.color = '#a3a3a3';

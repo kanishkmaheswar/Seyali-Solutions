@@ -72,20 +72,15 @@ const Footer = () => {
                         gap: '0.5rem',
                         marginBottom: '1.5rem'
                     }}>
-                        <div style={{
-                            width: '32px',
-                            height: '32px',
-                            background: 'white',
-                            borderRadius: '4px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>+</span>
-                        </div>
+                        <img src="/logo.png" alt="Seyali Solutions Logo" style={{
+                            width: '40px',
+                            height: '40px',
+                            objectFit: 'contain'
+                        }} />
                         <h3 style={{
                             fontSize: '1.2rem',
-                            color: 'white',
+                            color: '#ff4d4d',
+                            opacity: '1',
                             fontWeight: '600',
                             margin: 0
                         }}>
@@ -103,7 +98,7 @@ const Footer = () => {
                             marginBottom: '1.5rem',
                             transition: 'color 0.3s ease'
                         }}
-                        onMouseEnter={(e) => e.target.style.color = '#fbbf24'}
+                        onMouseEnter={(e) => e.target.style.color = '#ff4d4d'}
                         onMouseLeave={(e) => e.target.style.color = '#888'}
                     >
                         seyalisolutions@gmail.com

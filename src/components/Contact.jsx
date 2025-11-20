@@ -1,6 +1,33 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
+import toast from 'react-hot-toast';
 
 const Contact = () => {
+    const form = useRef();
+    const [loading, setLoading] = useState(false);
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        emailjs.sendForm(
+            import.meta.env.VITE_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+            form.current,
+            import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        )
+            .then((result) => {
+                console.log(result.text);
+                toast.success('Message Sent Successfully!');
+                setLoading(false);
+                e.target.reset();
+            }, (error) => {
+                console.log(error.text);
+                toast.error('Failed to send message. Please try again.');
+                setLoading(false);
+            });
+    };
+
     return (
         <section id="contact" className="section" style={{ background: '#000000', padding: '6rem 0' }}>
             <div className="container" style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 1.5rem' }}>
@@ -12,7 +39,7 @@ const Contact = () => {
                         padding: '0.5rem 1.5rem',
                         borderRadius: '50px',
                         border: '1px solid #333',
-                        color: '#fbbf24', // Amber/Yellow for the dot
+                        color: '#ff4d4d', // Amber/Yellow for the dot
                         fontSize: '0.9rem',
                         marginBottom: '1.5rem',
                         background: 'rgba(255,255,255,0.05)'
@@ -42,34 +69,34 @@ const Contact = () => {
                     padding: '4rem',
                     position: 'relative'
                 }}>
-                    <form onSubmit={(e) => { e.preventDefault(); alert('Message Sent!'); }} style={{ display: 'grid', gap: '2.5rem' }}>
+                    <form ref={form} onSubmit={sendEmail} style={{ display: 'grid', gap: '2.5rem' }}>
 
                         {/* Row 1 */}
                         <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
                             <div>
                                 <label style={labelStyle}>Name *</label>
-                                <input type="text" placeholder="David Johnson" style={inputStyle} />
+                                <input type="text" name="name" placeholder="David Johnson" style={inputStyle} required />
                             </div>
                             <div>
                                 <label style={labelStyle}>Email *</label>
-                                <input type="email" placeholder="example@mail.com" style={inputStyle} />
+                                <input type="email" name="email" placeholder="example@mail.com" style={inputStyle} required />
                             </div>
                         </div>
 
                         {/* Row 2 */}
                         <div>
                             <label style={labelStyle}>Company Name *</label>
-                            <input type="text" placeholder="Ex. StaticMania" style={inputStyle} />
+                            <input type="text" name="title" placeholder="Ex. StaticMania" style={inputStyle} required />
                         </div>
 
                         {/* Row 4 */}
                         <div>
                             <label style={labelStyle}>Project Details</label>
-                            <textarea rows="1" placeholder="Tell us more about your project" style={{
+                            <textarea rows="1" name="message" placeholder="Tell us more about your project" style={{
                                 ...inputStyle,
                                 resize: 'none',
                                 minHeight: 'auto'
-                            }}></textarea>
+                            }} required></textarea>
                         </div>
 
                         {/* Footer */}
@@ -81,28 +108,33 @@ const Contact = () => {
                             borderTop: '1px solid #222',
                             paddingTop: '2rem'
                         }}>
-                            <button type="submit" style={{
+                            <button type="submit" disabled={loading} style={{
                                 padding: '1rem 3rem',
                                 background: 'transparent',
                                 border: '1px solid #444',
                                 color: 'white',
                                 borderRadius: '8px',
                                 fontSize: '1rem',
-                                cursor: 'pointer',
-                                transition: 'all 0.3s ease'
+                                cursor: loading ? 'not-allowed' : 'pointer',
+                                transition: 'all 0.3s ease',
+                                opacity: loading ? 0.7 : 1
                             }}
                                 onMouseOver={(e) => {
-                                    e.target.style.borderColor = '#FFD700';
-                                    e.target.style.background = 'transparent';
-                                    e.target.style.color = '#FFD700';
+                                    if (!loading) {
+                                        e.target.style.borderColor = '#ff4d4d';
+                                        e.target.style.background = 'transparent';
+                                        e.target.style.color = '#ff4d4d';
+                                    }
                                 }}
                                 onMouseOut={(e) => {
-                                    e.target.style.borderColor = '#444';
-                                    e.target.style.background = 'transparent';
-                                    e.target.style.color = 'white';
+                                    if (!loading) {
+                                        e.target.style.borderColor = '#444';
+                                        e.target.style.background = 'transparent';
+                                        e.target.style.color = 'white';
+                                    }
                                 }}
                             >
-                                Submit
+                                {loading ? 'Sending...' : 'Submit'}
                             </button>
                             <p className="form-footer-text" style={{ color: '#888', fontSize: '0.9rem' }}>
                                 We will contact you within 24 business hours.

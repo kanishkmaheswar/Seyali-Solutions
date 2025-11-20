@@ -111,8 +111,8 @@ button {
 
 .btn-primary:hover {
   background-color: transparent;
-  border-color: #FFD700;
-  color: #FFD700;
+  border-color: #ff4d4d;
+  color: #ff4d4d;
   transform: translateY(-2px);
 }
 

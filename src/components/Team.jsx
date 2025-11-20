@@ -14,7 +14,7 @@ const Team = () => {
             image: "kanishk.PNG", // Placeholder
             instagram: "https://www.instagram.com/kani.xhk_?igsh=MXh6N2ZvYjAxcXVq"
         },
-        
+
     ];
 
     return (
@@ -33,7 +33,7 @@ const Team = () => {
                         marginBottom: '1.5rem',
                         border: '1px solid rgba(255, 255, 255, 0.1)'
                     }}>
-                        <span style={{ color: '#fbbf24', fontSize: '0.6rem' }}>●</span>
+                        <span style={{ color: '#ff4d4d', fontSize: '0.6rem' }}>●</span>
                         <span style={{ color: '#a3a3a3', fontSize: '0.8rem', fontWeight: '500' }}>Our Team</span>
                     </div>
                     <h2 style={{
@@ -107,8 +107,8 @@ const Team = () => {
                             }}
                                 onMouseOver={(e) => {
                                     e.currentTarget.style.background = 'transparent';
-                                    e.currentTarget.style.borderColor = '#FFD700';
-                                    e.currentTarget.style.color = '#FFD700';
+                                    e.currentTarget.style.borderColor = '#ff4d4d';
+                                    e.currentTarget.style.color = '#ff4d4d';
                                 }}
                                 onMouseOut={(e) => {
                                     e.currentTarget.style.background = 'transparent';
