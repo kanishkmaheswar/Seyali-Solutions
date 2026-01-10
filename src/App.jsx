@@ -1,38 +1,25 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Industries from './components/Industries';
-import About from './components/About';
-import Team from './components/Team';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import Services from './components/Services';
-
-import { Toaster } from 'react-hot-toast';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import ServicesPage from './pages/ServicesPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import Portfolio from './pages/Portfolio';
 
 function App() {
   return (
-    <div className="app">
-      <Toaster
-        position="bottom-right"
-        reverseOrder={false}
-        toastOptions={{
-          duration: 5000,
-          style: {
-            background: '#333',
-            color: '#fff',
-          },
-        }}
-      />
-      <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <Industries />
-      <Team />
-      <Contact />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="services" element={<ServicesPage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="portfolio" element={<Portfolio />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

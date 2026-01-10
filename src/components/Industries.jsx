@@ -71,41 +71,52 @@ const Industries = () => {
                         </p>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                            {services.map((service, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, margin: "-50px" }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    style={{
-                                        background: '#0a0a0a',
-                                        border: '1px solid #222',
-                                        borderRadius: '1rem',
-                                        padding: '2.5rem',
-                                        cursor: 'pointer',
-                                        transition: 'border-color 0.3s ease'
-                                    }}
-                                    whileHover={{ borderColor: '#444' }}
-                                >
-                                    <div style={{
-                                        width: '50px',
-                                        height: '50px',
-                                        background: '#111',
-                                        borderRadius: '50%',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        marginBottom: '1.5rem',
-                                        color: '#ff4d4d',
-                                        border: '1px solid #222'
-                                    }}>
-                                        {service.icon}
-                                    </div>
-                                    <h3 style={{ color: 'white', fontSize: '1.5rem', marginBottom: '1rem' }}>{service.title}</h3>
-                                    <p style={{ color: '#888', lineHeight: '1.6', fontSize: '0.95rem' }}>{service.description}</p>
-                                </motion.div>
-                            ))}
+                            <motion.div
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: "-100px" }}
+                                variants={{
+                                    visible: { transition: { staggerChildren: 0.1 } },
+                                    hidden: {}
+                                }}
+                            >
+                                {services.map((service, index) => (
+                                    <motion.div
+                                        key={index}
+                                        variants={{
+                                            hidden: { opacity: 0, y: 20 },
+                                            visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+                                        }}
+                                        style={{
+                                            background: '#0a0a0a',
+                                            border: '1px solid #222',
+                                            borderRadius: '1rem',
+                                            padding: '2.5rem',
+                                            cursor: 'pointer',
+                                            transition: 'border-color 0.3s ease',
+                                            marginBottom: '2rem'
+                                        }}
+                                        whileHover={{ borderColor: '#444', scale: 1.02, transition: { duration: 0.2 } }}
+                                    >
+                                        <div style={{
+                                            width: '50px',
+                                            height: '50px',
+                                            background: '#111',
+                                            borderRadius: '50%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            marginBottom: '1.5rem',
+                                            color: '#ff4d4d',
+                                            border: '1px solid #222'
+                                        }}>
+                                            {service.icon}
+                                        </div>
+                                        <h3 style={{ color: 'white', fontSize: '1.5rem', marginBottom: '1rem' }}>{service.title}</h3>
+                                        <p style={{ color: '#888', lineHeight: '1.6', fontSize: '0.95rem' }}>{service.description}</p>
+                                    </motion.div>
+                                ))}
+                            </motion.div>
                         </div>
                     </div>
 

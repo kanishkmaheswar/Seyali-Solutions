@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -121,8 +122,8 @@ const Footer = () => {
                         Links
                     </h4>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                        <a
-                            href="#services"
+                        <Link
+                            to="/services"
                             style={{
                                 color: '#888',
                                 textDecoration: 'none',
@@ -132,9 +133,9 @@ const Footer = () => {
                             onMouseLeave={(e) => e.target.style.color = '#888'}
                         >
                             Services
-                        </a>
-                        <a
-                            href="#industries"
+                        </Link>
+                        <Link
+                            to="/services"
                             style={{
                                 color: '#888',
                                 textDecoration: 'none',
@@ -144,9 +145,9 @@ const Footer = () => {
                             onMouseLeave={(e) => e.target.style.color = '#888'}
                         >
                             Industries
-                        </a>
-                        <a
-                            href="#team"
+                        </Link>
+                        <Link
+                            to="/about"
                             style={{
                                 color: '#888',
                                 textDecoration: 'none',
@@ -156,7 +157,7 @@ const Footer = () => {
                             onMouseLeave={(e) => e.target.style.color = '#888'}
                         >
                             Team
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
@@ -184,7 +185,7 @@ const Footer = () => {
                             Instagram
                         </a>
                         <a
-                            href="#"
+                            href="https://www.linkedin.com/company/seyali-solutions"
                             style={{
                                 color: '#888',
                                 textDecoration: 'none',

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Spline from '@splinetool/react-spline';
 
 const Hero = () => {
@@ -8,6 +9,7 @@ const Hero = () => {
     const [subIndex, setSubIndex] = useState(0);
     const [deleting, setDeleting] = useState(false);
     const [blink, setBlink] = useState(true);
+    const [isSplineLoaded, setIsSplineLoaded] = useState(false);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -180,7 +182,7 @@ const Hero = () => {
                     </p>
 
                     {/* CTA */}
-                    <a href="#contact" style={{
+                    <Link to="/contact" style={{
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '0.5rem',
@@ -205,7 +207,7 @@ const Hero = () => {
                         }}
                     >
                         Book a call <span style={{ fontSize: '1.1rem' }}>↗</span>
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Right column */}
@@ -215,9 +217,26 @@ const Hero = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    position: 'relative'
+                    position: 'relative',
+                    pointerEvents: 'none' // Improved scroll performance
                 }}>
-                    <Spline scene="https://prod.spline.design/q3yJFQ1-tMFIq-oI/scene.splinecode" />
+                    {/* Loading State */}
+                    {!isSplineLoaded && (
+                        <div style={{
+                            position: 'absolute',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '100%',
+                            height: '100%'
+                        }}>
+                            <div className="loader"></div>
+                        </div>
+                    )}
+                    <Spline
+                        onLoad={() => setIsSplineLoaded(true)}
+                        scene="https://prod.spline.design/q3yJFQ1-tMFIq-oI/scene.splinecode"
+                    />
                 </div>
 
             </div>
@@ -277,6 +296,31 @@ const Hero = () => {
                     }
                     #home .container {
                         padding-top: 5rem !important;
+                    }
+                }
+                    #home .container {
+                        padding-top: 5rem !important;
+                    }
+                }
+                
+                /* Simple CSS Loader */
+                .loader {
+                    width: 48px;
+                    height: 48px;
+                    border: 5px solid #FFF;
+                    border-bottom-color: transparent;
+                    border-radius: 50%;
+                    display: inline-block;
+                    box-sizing: border-box;
+                    animation: rotation 1s linear infinite;
+                }
+
+                @keyframes rotation {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+                    100% {
+                        transform: rotate(360deg);
                     }
                 }
             `}</style>

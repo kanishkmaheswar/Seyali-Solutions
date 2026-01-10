@@ -143,78 +143,89 @@ const Services = () => {
 
                     {/* Right Column - Service List */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                        {services.map((service, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, x: 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                onClick={() => setActiveService(index)}
-                                style={{
-                                    background: activeService === index ? '#0a0a0a' : 'transparent',
-                                    border: `1px solid ${activeService === index ? '#444' : '#222'}`,
-                                    borderRadius: '1rem',
-                                    padding: '2rem',
-                                    cursor: 'pointer',
-                                    transition: 'all 0.3s ease',
-                                    position: 'relative',
-                                    overflow: 'hidden'
-                                }}
-                                onMouseEnter={(e) => {
-                                    if (activeService !== index) {
-                                        e.currentTarget.style.borderColor = '#333';
-                                        e.currentTarget.style.background = 'rgba(10, 10, 10, 0.5)';
-                                    }
-                                }}
-                                onMouseLeave={(e) => {
-                                    if (activeService !== index) {
-                                        e.currentTarget.style.borderColor = '#222';
-                                        e.currentTarget.style.background = 'transparent';
-                                    }
-                                }}
-                            >
-                                {/* Gold indicator */}
-                                {activeService === index && (
-                                    <div style={{
-                                        position: 'absolute',
-                                        left: 0,
-                                        top: 0,
-                                        bottom: 0,
-                                        width: '3px',
-                                        background: '#ff4d4d'
-                                    }}></div>
-                                )}
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-100px" }}
+                            variants={{
+                                visible: { transition: { staggerChildren: 0.15 } },
+                                hidden: {}
+                            }}
+                        >
+                            {services.map((service, index) => (
+                                <motion.div
+                                    key={index}
+                                    variants={{
+                                        hidden: { opacity: 0, x: 50 },
+                                        visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                                    }}
+                                    onClick={() => setActiveService(index)}
+                                    style={{
+                                        background: activeService === index ? '#0a0a0a' : 'transparent',
+                                        border: `1px solid ${activeService === index ? '#444' : '#222'}`,
+                                        borderRadius: '1rem',
+                                        padding: '2rem',
+                                        marginBottom: '1.5rem',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s ease',
+                                        position: 'relative',
+                                        overflow: 'hidden'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        if (activeService !== index) {
+                                            e.currentTarget.style.borderColor = '#333';
+                                            e.currentTarget.style.background = 'rgba(10, 10, 10, 0.5)';
+                                        }
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        if (activeService !== index) {
+                                            e.currentTarget.style.borderColor = '#222';
+                                            e.currentTarget.style.background = 'transparent';
+                                        }
+                                    }}
+                                >
+                                    {/* Gold indicator */}
+                                    {activeService === index && (
+                                        <div style={{
+                                            position: 'absolute',
+                                            left: 0,
+                                            top: 0,
+                                            bottom: 0,
+                                            width: '3px',
+                                            background: '#ff4d4d'
+                                        }}></div>
+                                    )}
 
-                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-                                    <div style={{
-                                        width: '8px',
-                                        height: '8px',
-                                        background: '#ff4d4d',
-                                        borderRadius: '50%',
-                                        marginTop: '0.5rem',
-                                        flexShrink: 0
-                                    }}></div>
-                                    <div style={{ flex: 1 }}>
-                                        <h4 style={{
-                                            color: 'white',
-                                            fontSize: '1.3rem',
-                                            marginBottom: '0.5rem',
-                                            fontWeight: '600'
-                                        }}>
-                                            {service.title}
-                                        </h4>
-                                        <p style={{
-                                            color: '#888',
-                                            lineHeight: '1.6',
-                                            fontSize: '0.9rem'
-                                        }}>
-                                            {service.description}
-                                        </p>
+                                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                                        <div style={{
+                                            width: '8px',
+                                            height: '8px',
+                                            background: '#ff4d4d',
+                                            borderRadius: '50%',
+                                            marginTop: '0.5rem',
+                                            flexShrink: 0
+                                        }}></div>
+                                        <div style={{ flex: 1 }}>
+                                            <h4 style={{
+                                                color: 'white',
+                                                fontSize: '1.3rem',
+                                                marginBottom: '0.5rem',
+                                                fontWeight: '600'
+                                            }}>
+                                                {service.title}
+                                            </h4>
+                                            <p style={{
+                                                color: '#888',
+                                                lineHeight: '1.6',
+                                                fontSize: '0.9rem'
+                                            }}>
+                                                {service.description}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </motion.div>
-                        ))}
+                                </motion.div>
+                            ))}
+                        </motion.div>
                     </div>
                 </div>
             </div>

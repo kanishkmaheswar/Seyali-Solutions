@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -11,6 +13,18 @@ const Navbar = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    const navItems = [
+        { name: 'Home', path: '/' },
+        { name: 'Services', path: '/services' },
+        { name: 'Portfolio', path: '/portfolio' },
+        { name: 'About', path: '/about' },
+    ];
+
+    const isActive = (path) => {
+        if (path === '/' && location.pathname !== '/') return false;
+        return location.pathname.startsWith(path);
+    };
 
     return (
         <nav style={{
@@ -21,8 +35,8 @@ const Navbar = () => {
             zIndex: 1000,
             transition: 'all 0.3s ease',
             padding: '1.5rem 0',
-            background: 'transparent',
-            backdropFilter: 'none',
+            background: scrolled || mobileMenuOpen ? 'rgba(0,0,0,0.8)' : 'transparent',
+            backdropFilter: scrolled || mobileMenuOpen ? 'blur(10px)' : 'none',
             borderBottom: 'none'
         }}>
             <div className="container" style={{
@@ -32,14 +46,14 @@ const Navbar = () => {
                 position: 'relative'
             }}>
                 {/* Logo */}
-                <a href="#home" style={{
+                <Link to="/" style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.5rem',
                     textDecoration: 'none',
                     zIndex: 1001,
-                    opacity: scrolled ? 0 : 1,
-                    pointerEvents: scrolled ? 'none' : 'auto',
+                    opacity: scrolled ? 1 : 1, // Always visible now
+                    pointerEvents: 'auto',
                     transition: 'opacity 0.3s ease'
                 }}>
                     <img src="/logo.png" alt="Seyali Solutions Logo" style={{
@@ -55,7 +69,7 @@ const Navbar = () => {
                     }}>
                         Seyali Solutions
                     </span>
-                </a>
+                </Link>
 
                 {/* Mobile Menu Button */}
                 <button
@@ -94,9 +108,10 @@ const Navbar = () => {
                     gap: '0.5rem',
                     backdropFilter: 'blur(10px)'
                 }} className="desktop-nav">
-                    {['Home', 'Services', 'Industries', 'Team'].map((item) => (
-                        <a key={item} href={`#${item.toLowerCase()}`} style={{
-                            color: '#a3a3a3',
+                    {navItems.map((item) => (
+                        <Link key={item.name} to={item.path} style={{
+                            color: isActive(item.path) ? 'white' : '#a3a3a3',
+                            background: isActive(item.path) ? 'rgba(255,255,255,0.1)' : 'transparent',
                             textDecoration: 'none',
                             fontSize: '0.9rem',
                             fontWeight: '500',
@@ -105,21 +120,25 @@ const Navbar = () => {
                             transition: 'all 0.3s ease'
                         }}
                             onMouseOver={(e) => {
-                                e.target.style.color = 'white';
-                                e.target.style.background = 'rgba(255,255,255,0.1)';
+                                if (!isActive(item.path)) {
+                                    e.target.style.color = 'white';
+                                    e.target.style.background = 'rgba(255,255,255,0.05)';
+                                }
                             }}
                             onMouseOut={(e) => {
-                                e.target.style.color = '#a3a3a3';
-                                e.target.style.background = 'transparent';
+                                if (!isActive(item.path)) {
+                                    e.target.style.color = '#a3a3a3';
+                                    e.target.style.background = 'transparent';
+                                }
                             }}
                         >
-                            {item}
-                        </a>
+                            {item.name}
+                        </Link>
                     ))}
                 </div>
 
                 {/* Desktop Right Button */}
-                <a href="#contact" style={{
+                <Link to="/contact" style={{
                     background: 'rgba(20, 20, 20, 0.8)',
                     border: '1px solid rgba(255, 255, 255, 0.1)',
                     color: 'white',
@@ -129,8 +148,8 @@ const Navbar = () => {
                     fontWeight: '500',
                     textDecoration: 'none',
                     transition: 'all 0.3s ease',
-                    opacity: scrolled ? 0 : 1,
-                    pointerEvents: scrolled ? 'none' : 'auto'
+                    opacity: 1,
+                    pointerEvents: 'auto'
                 }} className="desktop-contact-btn"
                     onMouseOver={(e) => {
                         e.target.style.borderColor = '#ff4d4d';
@@ -144,50 +163,42 @@ const Navbar = () => {
                     }}
                 >
                     Contact
-                </a>
+                </Link>
             </div>
 
             {/* Mobile Menu */}
             <div style={{
                 position: 'fixed',
-                top: '80px',
+                top: '0',
                 left: 0,
                 right: 0,
-                background: 'rgba(10, 10, 10, 0.98)',
+                bottom: 0,
+                background: 'rgba(5, 5, 5, 0.98)',
                 backdropFilter: 'blur(20px)',
-                padding: '2rem',
+                padding: '6rem 2rem 2rem 2rem',
                 display: mobileMenuOpen ? 'flex' : 'none',
                 flexDirection: 'column',
                 gap: '1rem',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                zIndex: 1000
+                zIndex: 1000,
+                alignItems: 'center',
+                justifyContent: 'center'
             }} className="mobile-menu">
-                {['Home', 'Services', 'Industries', 'Team', 'Contact'].map((item) => (
-                    <a
-                        key={item}
-                        href={`#${item.toLowerCase()}`}
+                {navItems.concat({ name: 'Contact', path: '/contact' }).map((item) => (
+                    <Link
+                        key={item.name}
+                        to={item.path}
                         onClick={() => setMobileMenuOpen(false)}
                         style={{
-                            color: '#a3a3a3',
+                            color: isActive(item.path) ? '#ff4d4d' : '#a3a3a3',
                             textDecoration: 'none',
-                            fontSize: '1.1rem',
-                            fontWeight: '500',
+                            fontSize: '1.5rem',
+                            fontWeight: '600',
                             padding: '1rem',
-                            borderRadius: '8px',
-                            transition: 'all 0.3s ease',
-                            background: 'rgba(255, 255, 255, 0.05)'
-                        }}
-                        onMouseOver={(e) => {
-                            e.target.style.color = '#ff4d4d';
-                            e.target.style.background = 'rgba(255, 77, 77, 0.1)';
-                        }}
-                        onMouseOut={(e) => {
-                            e.target.style.color = '#a3a3a3';
-                            e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                            transition: 'all 0.3s ease'
                         }}
                     >
-                        {item}
-                    </a>
+                        {item.name}
+                    </Link>
                 ))}
             </div>
 

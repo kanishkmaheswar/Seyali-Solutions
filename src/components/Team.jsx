@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Team = () => {
     const teamMembers = [
@@ -44,8 +45,8 @@ const Team = () => {
                         lineHeight: '1.1',
                         letterSpacing: '-0.02em'
                     }}>
-                        Meet the Minds that Shaping <br />
-                        <span style={{ color: '#888' }}>the Future</span>
+                        Meet the Minds <br />
+                        <span style={{ color: '#888' }}>Shaping the Future</span>
                     </h2>
                     <p style={{
                         color: '#a3a3a3',
@@ -58,24 +59,40 @@ const Team = () => {
                 </div>
 
                 {/* Team Grid */}
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-                    gap: '2rem',
-                    maxWidth: '1000px',
-                    margin: '0 auto'
-                }}>
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={{
+                        visible: { transition: { staggerChildren: 0.2 } },
+                        hidden: {}
+                    }}
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+                        gap: '2rem',
+                        maxWidth: '1000px',
+                        margin: '0 auto'
+                    }}
+                >
                     {teamMembers.map((member, index) => (
-                        <div key={index} style={{
-                            background: '#0a0a0a',
-                            border: '1px solid #222',
-                            borderRadius: '2rem',
-                            padding: '1.5rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '1.5rem',
-                            transition: 'transform 0.3s ease'
-                        }}>
+                        <motion.div
+                            key={index}
+                            variants={{
+                                hidden: { opacity: 0, y: 30 },
+                                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+                            }}
+                            style={{
+                                background: '#0a0a0a',
+                                border: '1px solid #222',
+                                borderRadius: '2rem',
+                                padding: '1.5rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1.5rem',
+                                transition: 'transform 0.3s ease'
+                            }}
+                        >
                             <img
                                 src={member.image}
                                 alt={member.name}
@@ -122,11 +139,12 @@ const Team = () => {
                                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                                 </svg>
                             </a>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
 
             </div>
+
         </section>
     );
 };
