@@ -44,7 +44,7 @@ const Contact = () => {
                         marginBottom: '1.5rem',
                         background: 'rgba(255,255,255,0.05)'
                     }}>
-                        <span style={{ marginRight: '0.5rem' }}>●</span> Contact
+                        <span style={{ marginRight: '0.5rem' }}>●</span> <span style={{ color: '#a3a3a3' }}>Contact</span>
                     </span>
                     <h2 className="contact-title" style={{
                         fontSize: '3.5rem',
