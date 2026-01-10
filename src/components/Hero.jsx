@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Spline from '@splinetool/react-spline';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
 
@@ -133,7 +134,7 @@ const Hero = () => {
                     alignItems: 'flex-start',
                     textAlign: 'left',
                     marginLeft: '-50px',
-                    marginRight: '100px'
+                    marginRight: '0'
                 }}>
 
                     {/* Badge */}
@@ -155,28 +156,31 @@ const Hero = () => {
 
                     {/* Headline with Typewriter */}
                     <h1 style={{
-                        fontSize: '3.4rem',
+                        fontSize: '3.5rem', // Restored size
                         fontWeight: '700',
                         color: 'white',
                         lineHeight: '1.1',
                         marginBottom: '1.5rem',
                         letterSpacing: '-0.02em',
-                        maxWidth: '1200px'
+                        maxWidth: '800px', // Restored width
+                        textShadow: 'none' // Removed shadow
                     }}>
-                        Access the full power of{" "}
+                        Access the full power{" "}
+                        <br />
                         <span style={{ color: '#FFD700' }}>
-                            {words[index].substring(0, subIndex)}
+                            <span style={{ color: '#ffffffff' }}>of{" "}</span>{words[index].substring(0, subIndex)}
                             {blink ? "|" : ""}
                         </span>
                     </h1>
 
                     {/* Subheadline */}
                     <p style={{
-                        fontSize: '1rem',
+                        fontSize: '1.1rem',
                         color: '#a3a3a3',
                         maxWidth: '600px',
                         lineHeight: '1.6',
-                        marginBottom: '3rem'
+                        marginBottom: '3rem',
+                        textShadow: 'none'
                     }}>
                         Experience the pinnacle of efficiency in data processing with AI. Our groundbreaking tech opens unlimited potential across a range of industries.
                     </p>
@@ -193,7 +197,8 @@ const Hero = () => {
                         textDecoration: 'none',
                         fontWeight: '500',
                         border: '1px solid #333',
-                        transition: 'all 0.3s ease'
+                        transition: 'all 0.3s ease',
+                        boxShadow: 'none'
                     }}
                         onMouseOver={(e) => {
                             e.currentTarget.style.borderColor = '#ff4d4d';
@@ -210,35 +215,49 @@ const Hero = () => {
                     </Link>
                 </div>
 
-                {/* Right column */}
-                <div style={{
-                    flex: 1,
-                    height: '1200px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'relative',
-                    pointerEvents: 'none' // Improved scroll performance
-                }}>
-                    {/* Loading State */}
+                {/* Right column (Placeholder for layout balance) */}
+                <div style={{ flex: 1 }}></div>
+
+                {/* Absolute Spline Container - Forced Large Size with Animation */}
+                <motion.div
+                    initial={{ scale: 3, opacity: 0, y: '-50%' }}
+                    animate={{ scale: 1.15, opacity: 1, y: '-50%' }}
+                    transition={{
+                        duration: 10.0,
+                        ease: [0.22, 1, 0.36, 1],
+                        delay: 0
+                    }}
+                    style={{
+                        position: 'absolute',
+                        right: '-2%',
+                        top: '60%',
+                        // Transform handled by Framer Motion props (y) to avoid conflicts
+                        width: 'min(120vh, 800px)',
+                        height: 'min(120vh, 800px)',
+                        zIndex: 0,
+                        pointerEvents: 'none'
+                    }}
+                >
                     {!isSplineLoaded && (
                         <div style={{
                             position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: '100%',
-                            height: '100%'
                         }}>
                             <div className="loader"></div>
                         </div>
                     )}
                     <Spline
+                        scene="https://prod.spline.design/sOy7jFmEEICPECl7/scene.splinecode"
                         onLoad={() => setIsSplineLoaded(true)}
-                        scene="https://prod.spline.design/q3yJFQ1-tMFIq-oI/scene.splinecode"
+                        style={{ width: '100%', height: '100%' }}
                     />
-                </div>
-
+                </motion.div>
             </div>
 
             {/* Scroll arrow */}
@@ -263,7 +282,9 @@ const Hero = () => {
             <style>{`
                 #home canvas {
                     background: transparent !important;
-                    transform: scale(2.5);
+                    /* Removed visual scaling to show full globe */
+                    width: 100% !important;
+                    height: 100% !important;
                 }
                 
                 @media (max-width: 900px) {

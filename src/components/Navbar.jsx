@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -166,41 +167,55 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            {/* Mobile Menu */}
-            <div style={{
-                position: 'fixed',
-                top: '0',
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: 'rgba(5, 5, 5, 0.98)',
-                backdropFilter: 'blur(20px)',
-                padding: '6rem 2rem 2rem 2rem',
-                display: mobileMenuOpen ? 'flex' : 'none',
-                flexDirection: 'column',
-                gap: '1rem',
-                zIndex: 1000,
-                alignItems: 'center',
-                justifyContent: 'center'
-            }} className="mobile-menu">
-                {navItems.concat({ name: 'Contact', path: '/contact' }).map((item) => (
-                    <Link
-                        key={item.name}
-                        to={item.path}
-                        onClick={() => setMobileMenuOpen(false)}
+            {/* Mobile Menu Dropdown */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
                         style={{
-                            color: isActive(item.path) ? '#ff4d4d' : '#a3a3a3',
-                            textDecoration: 'none',
-                            fontSize: '1.5rem',
-                            fontWeight: '600',
-                            padding: '1rem',
-                            transition: 'all 0.3s ease'
+                            position: 'fixed',
+                            top: '5rem', // Below the navbar
+                            left: '1rem',
+                            right: '1rem',
+                            background: 'rgba(10, 10, 10, 0.95)',
+                            backdropFilter: 'blur(16px)',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            borderRadius: '1rem',
+                            padding: '1.5rem',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            gap: '1rem',
+                            zIndex: 999, // Below the navbar button (1001)
+                            boxShadow: '0 10px 40px -10px rgba(0,0,0,0.5)'
                         }}
                     >
-                        {item.name}
-                    </Link>
-                ))}
-            </div>
+                        {navItems.concat({ name: 'Contact', path: '/contact' }).map((item) => (
+                            <Link
+                                key={item.name}
+                                to={item.path}
+                                onClick={() => setMobileMenuOpen(false)}
+                                style={{
+                                    color: isActive(item.path) ? '#ffffffff' : '#6a6a6aff',
+                                    textDecoration: 'none',
+                                    fontSize: '1.1rem',
+                                    fontWeight: '500',
+                                    padding: '0.75rem',
+                                    width: '100%',
+                                    textAlign: 'center',
+                                    borderBottom: '1px solid rgba(255,255,255,0.03)',
+                                    display: 'block'
+                                }}
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <style>{`
                 @media (max-width: 900px) {
