@@ -3,8 +3,9 @@ import Hero from '../components/Hero';
 import Services from '../components/Services';
 import About from '../components/About';
 import Industries from '../components/Industries';
+import WhyChooseUs from '../components/WhyChooseUs';
 import Team from '../components/Team';
-import Contact from '../components/Contact';
+import Cta from '../components/Cta';
 
 const Home = () => {
     useEffect(() => {
@@ -17,8 +18,9 @@ const Home = () => {
             <About />
             <Services />
             <Industries />
+            <WhyChooseUs />
             <Team />
-            <Contact />
+            <Cta />
         </main>
     );
 };

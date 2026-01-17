@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import ServicesComponent from '../components/Services';
+import Process from '../components/Process';
 import IndustriesComponent from '../components/Industries';
+import ServiceDetails from '../components/ServiceDetails';
 
 const ServicesPage = () => {
     useEffect(() => {
@@ -8,8 +9,9 @@ const ServicesPage = () => {
     }, []);
 
     return (
-        <div style={{ paddingTop: '80px' }}>
-            <ServicesComponent />
+        <div style={{ paddingTop: '30px' }}>
+            <ServiceDetails />
+            <Process />
             <IndustriesComponent />
         </div>
     );

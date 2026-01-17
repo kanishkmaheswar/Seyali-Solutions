@@ -115,150 +115,149 @@ const Hero = () => {
 
             {/* Content */}
             <div className="container" style={{
-                position: 'relative',
+                position: 'absolute',
+                top: '30%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
                 zIndex: 2,
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'space-between',
+                justifyContent: 'center',
                 width: '100%',
-                paddingTop: '4rem',
-                gap: '2rem'
+                paddingTop: '6rem',
+                gap: '1rem',
+                textAlign: 'center'
             }}>
 
-                {/* Left column */}
+                {/* Badge */}
                 <div style={{
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    textAlign: 'left',
-                    marginLeft: '-50px',
-                    marginRight: '0'
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.5rem 1.5rem',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 0, 0, 0.84)',
+                    borderRadius: '50px',
+                    marginBottom: '1rem',
+                    backdropFilter: 'blur(10px)'
                 }}>
-
-                    {/* Badge */}
-                    <div style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        padding: '0.5rem 1.5rem',
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        borderRadius: '50px',
-                        marginBottom: '2rem',
-                        backdropFilter: 'blur(10px)'
-                    }}>
-                        <span style={{ color: '#ff4d4d', fontSize: '0.8rem' }}>●</span>
-                        <span style={{ color: '#e5e5e5', fontSize: '0.9rem', fontWeight: '500', letterSpacing: '0.5px' }}>Unlock the power of AI & ML</span>
-                        <span style={{ color: '#ff4d4d', fontSize: '0.8rem' }}>●</span>
-                    </div>
-
-                    {/* Headline with Typewriter */}
-                    <h1 style={{
-                        fontSize: '3.5rem', // Restored size
-                        fontWeight: '700',
-                        color: 'white',
-                        lineHeight: '1.1',
-                        marginBottom: '1.5rem',
-                        letterSpacing: '-0.02em',
-                        maxWidth: '800px', // Restored width
-                        textShadow: 'none' // Removed shadow
-                    }}>
-                        Access the full power{" "}
-                        <br />
-                        <span style={{ color: '#FFD700' }}>
-                            <span style={{ color: '#ffffffff' }}>of{" "}</span>{words[index].substring(0, subIndex)}
-                            {blink ? "|" : ""}
-                        </span>
-                    </h1>
-
-                    {/* Subheadline */}
-                    <p style={{
-                        fontSize: '1.1rem',
-                        color: '#a3a3a3',
-                        maxWidth: '600px',
-                        lineHeight: '1.6',
-                        marginBottom: '3rem',
-                        textShadow: 'none'
-                    }}>
-                        Experience the pinnacle of efficiency in data processing with AI. Our groundbreaking tech opens unlimited potential across a range of industries.
-                    </p>
-
-                    {/* CTA */}
-                    <Link to="/contact" style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        background: '#111',
-                        color: 'white',
-                        padding: '1rem 2rem',
-                        borderRadius: '8px',
-                        textDecoration: 'none',
-                        fontWeight: '500',
-                        border: '1px solid #333',
-                        transition: 'all 0.3s ease',
-                        boxShadow: 'none'
-                    }}
-                        onMouseOver={(e) => {
-                            e.currentTarget.style.borderColor = '#ff4d4d';
-                            e.currentTarget.style.color = '#ff4d4d';
-                            e.currentTarget.style.transform = 'translateY(-2px)';
-                        }}
-                        onMouseOut={(e) => {
-                            e.currentTarget.style.borderColor = '#333';
-                            e.currentTarget.style.color = 'white';
-                            e.currentTarget.style.transform = 'translateY(0)';
-                        }}
-                    >
-                        Book a call <span style={{ fontSize: '1.1rem' }}>↗</span>
-                    </Link>
+                    <span style={{ color: '#ff4d4d', fontSize: '0.8rem' }}>●</span>
+                    <span style={{ color: '#e5e5e5', fontSize: '0.9rem', fontWeight: '700', letterSpacing: '0.5px' }}>Unlock the power of AI & ML</span>
+                    <span style={{ color: '#ff4d4d', fontSize: '0.8rem' }}>●</span>
                 </div>
 
-                {/* Right column (Placeholder for layout balance) */}
-                <div style={{ flex: 1 }}></div>
+                {/* Headline with Typewriter */}
+                <h1 style={{
+                    fontSize: '3.5rem',
+                    fontWeight: '800',
+                    color: 'white',
+                    lineHeight: '1.1',
+                    marginBottom: '1.5rem',
+                    letterSpacing: '-0.05em',
+                    maxWidth: '900px',
+                    textShadow: '',
+                    textAlign: 'center'
+                }}>
+                    Access the full power{" "}
+                    <br />
+                    <span style={{ color: '#FFD700' }}>
+                        <span style={{ color: '#ffffffff' }}>of{" "}</span><span style={{ fontStyle: 'italic' }}>{words[index].substring(0, subIndex)}</span>
+                        {blink ? "|" : ""}
+                    </span>
+                </h1>
 
-                {/* Absolute Spline Container - Forced Large Size with Animation */}
+                <div style={{ maxWidth: '900px', marginTop: '-20px', marginBottom: '2rem', textAlign: 'center'}}>
+                    <p className='text-gray-200 text-center'>Experience the pinnacle of efficiency in data processing with AI. Our groundbreaking
+                        technology streamlines workflows, enhances decision-making, and drives innovation.
+                    </p>
+                </div>
+
+            </div>
+
+            {/* Absolute Spline Container - Centered */}
+            <motion.div
+                initial={{ scale: 0.8, opacity: 0, y: 100 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                transition={{
+                    duration: 1.5,
+                    ease: "easeOut",
+                    delay: 0.2
+                }}
+                style={{
+                    position: 'absolute',
+                    top: '75%', // Moved significantly down to create horizon effect
+                    left: '0%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '100vw',
+                    height: '100vh',
+                    zIndex: 1,
+                    pointerEvents: 'none',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    overflow: 'visible' // Allow the large globe to bleed out
+                }}
+            >
+                {!isSplineLoaded && (
+                    <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        <div className="loader"></div>
+                    </div>
+                )}
+
+                {/* Globe Glow Animation */}
                 <motion.div
-                    initial={{ scale: 3, opacity: 0, y: '-50%' }}
-                    animate={{ scale: 1.15, opacity: 1, y: '-50%' }}
+                    animate={{
+                        opacity: [0.3, 0.6, 0.3],
+                        scale: [1, 1.2, 1],
+                    }}
                     transition={{
-                        duration: 10.0,
-                        ease: [0.22, 1, 0.36, 1],
-                        delay: 0
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut"
                     }}
                     style={{
                         position: 'absolute',
-                        right: '-2%',
-                        top: '60%',
-                        // Transform handled by Framer Motion props (y) to avoid conflicts
-                        width: 'min(120vh, 800px)',
-                        height: 'min(120vh, 800px)',
-                        zIndex: 0,
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '80%',
+                        height: '80%',
+                        background: 'radial-gradient(circle, rgba(0, 198, 255, 0.3) 0%, rgba(0, 112, 243, 0.1) 40%, transparent 70%)',
+                        filter: 'blur(80px)',
+                        zIndex: -1,
                         pointerEvents: 'none'
                     }}
-                >
-                    {!isSplineLoaded && (
-                        <div style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                        }}>
-                            <div className="loader"></div>
-                        </div>
-                    )}
+                />
+
+                <div style={{
+                    width: '140%', // Significantly larger width to flatten the curve
+                    height: '140%',
+                    position: 'relative',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    transform: 'scale(1.5)' // Additional visual scaling
+                }}>
                     <Spline
                         scene="https://prod.spline.design/sOy7jFmEEICPECl7/scene.splinecode"
                         onLoad={() => setIsSplineLoaded(true)}
-                        style={{ width: '100%', height: '100%' }}
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                        }}
                     />
-                </motion.div>
-            </div>
+                </div>
+            </motion.div>
 
             {/* Scroll arrow */}
             <div style={{
@@ -282,32 +281,13 @@ const Hero = () => {
             <style>{`
                 #home canvas {
                     background: transparent !important;
-                    /* Removed visual scaling to show full globe */
                     width: 100% !important;
                     height: 100% !important;
                 }
                 
                 @media (max-width: 900px) {
-                    #home .container {
-                        flex-direction: column !important;
-                        text-align: center !important;
-                        padding-top: 6rem !important;
-                    }
-                    #home .container > div:first-of-type {
-                        align-items: center !important;
-                        margin-left: 0 !important;
-                        margin-right: 0 !important;
-                        text-align: center !important;
-                        padding: 0 1rem !important;
-                    }
-                    #home .container > div:last-of-type {
-                        display: none !important;
-                    }
-                    #home h1 {
-                        font-size: 2.5rem !important;
-                    }
-                    #home p {
-                        font-size: 0.95rem !important;
+                     #home h1 {
+                        font-size: 3rem !important;
                     }
                 }
 

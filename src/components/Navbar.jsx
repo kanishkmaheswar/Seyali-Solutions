@@ -35,51 +35,67 @@ const Navbar = () => {
             width: '100%',
             zIndex: 1000,
             transition: 'all 0.3s ease',
-            padding: '1.5rem 0',
-            background: scrolled || mobileMenuOpen ? 'rgba(0,0,0,0.8)' : 'transparent',
+            padding: scrolled ? '1rem 0' : '1.5rem 0',
+            background: scrolled || mobileMenuOpen ? 'rgba(0,0,0,0.9)' : 'transparent',
             backdropFilter: scrolled || mobileMenuOpen ? 'blur(10px)' : 'none',
-            borderBottom: 'none'
+            borderBottom: scrolled ? '1px solid rgba(255,255,255,0.05)' : 'none'
         }}>
             <div className="container" style={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                position: 'relative'
+                maxWidth: '1400px',
+                margin: '0 auto',
+                padding: '0 2rem'
             }}>
-                {/* Logo */}
-                <Link to="/" style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    textDecoration: 'none',
-                    zIndex: 1001,
-                    opacity: scrolled ? 1 : 1, // Always visible now
-                    pointerEvents: 'auto',
-                    transition: 'opacity 0.3s ease'
-                }}>
-                    <img src="/logo.png" alt="Seyali Solutions Logo" style={{
-                        width: '32px',
-                        height: '32px',
-                        objectFit: 'contain'
-                    }} />
-                    <span style={{
-                        fontSize: '1.1rem',
-                        fontWeight: '600',
-                        color: 'white',
-                        letterSpacing: '-0.02em'
+                {/* Logo Section */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <Link to="/" style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.6rem',
+                        textDecoration: 'none',
+                        zIndex: 1001,
                     }}>
-                        Seyali Solutions
-                    </span>
-                </Link>
+                        <img src="/logo.png" alt="Logo" style={{
+                            width: '28px',
+                            height: '28px',
+                            objectFit: 'contain'
+                        }} />
+                        <span style={{
+                            fontSize: '1rem',
+                            fontWeight: '700',
+                            color: 'white',
+                            letterSpacing: '0.05em',
+                            textTransform: 'uppercase'
+                        }}>
+                            Seyali Solutions
+                        </span>
+                    </Link>
+
+                    {/* BETA ACCESS Badge */}
+                    <div style={{
+                        fontSize: '0.65rem',
+                        fontWeight: '600',
+                        color: 'rgba(255,255,255,0.6)',
+                        border: '1px solid rgba(255,255,255,0.2)',
+                        padding: '2px 6px',
+                        borderRadius: '4px',
+                        letterSpacing: '0.05em',
+                        textTransform: 'uppercase',
+                        marginLeft: '0.5rem'
+                    }}>
+                        BETA ACCESS
+                    </div>
+                </div>
 
                 {/* Mobile Menu Button */}
                 <button
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     style={{
                         display: 'none',
-                        background: 'rgba(20, 20, 20, 0.8)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        borderRadius: '8px',
+                        background: 'transparent',
+                        border: 'none',
                         padding: '0.5rem',
                         cursor: 'pointer',
                         zIndex: 1001
@@ -95,134 +111,131 @@ const Navbar = () => {
                     </svg>
                 </button>
 
-                {/* Desktop Center Navigation */}
+                {/* Desktop Navigation */}
                 <div style={{
-                    position: 'absolute',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    background: 'rgba(20, 20, 20, 0.8)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '50px',
-                    padding: '0.5rem 0.5rem',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.5rem',
-                    backdropFilter: 'blur(10px)'
+                    gap: '2.5rem'
                 }} className="desktop-nav">
-                    {navItems.map((item) => (
-                        <Link key={item.name} to={item.path} style={{
-                            color: isActive(item.path) ? 'white' : '#a3a3a3',
-                            background: isActive(item.path) ? 'rgba(255,255,255,0.1)' : 'transparent',
-                            textDecoration: 'none',
-                            fontSize: '0.9rem',
-                            fontWeight: '500',
-                            padding: '0.5rem 1.5rem',
-                            borderRadius: '25px',
-                            transition: 'all 0.3s ease'
-                        }}
-                            onMouseOver={(e) => {
-                                if (!isActive(item.path)) {
-                                    e.target.style.color = 'white';
-                                    e.target.style.background = 'rgba(255,255,255,0.05)';
-                                }
-                            }}
-                            onMouseOut={(e) => {
-                                if (!isActive(item.path)) {
-                                    e.target.style.color = '#a3a3a3';
-                                    e.target.style.background = 'transparent';
-                                }
-                            }}
-                        >
-                            {item.name}
-                        </Link>
-                    ))}
-                </div>
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '2rem'
+                    }}>
+                        {navItems.map((item) => (
+                            <div key={item.name} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                                <Link to={item.path} style={{
+                                    color: isActive(item.path) ? 'white' : 'rgba(255,255,255,0.7)',
+                                    textDecoration: 'none',
+                                    fontSize: '0.85rem',
+                                    fontWeight: '500',
+                                    transition: 'color 0.3s ease'
+                                }}
+                                    onMouseOver={(e) => e.target.style.color = 'white'}
+                                    onMouseOut={(e) => {
+                                        if (!isActive(item.path)) e.target.style.color = 'rgba(255,255,255,0.7)';
+                                    }}
+                                >
+                                    {item.name}
+                                </Link>
+                                {item.hasDropdown && (
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5, color: 'white' }}>
+                                        <path d="M6 9l6 6 6-6" />
+                                    </svg>
+                                )}
+                            </div>
+                        ))}
+                    </div>
 
-                {/* Desktop Right Button */}
-                <Link to="/contact" style={{
-                    background: 'rgba(20, 20, 20, 0.8)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    color: 'white',
-                    padding: '0.6rem 1.5rem',
-                    borderRadius: '8px',
-                    fontSize: '0.9rem',
-                    fontWeight: '500',
-                    textDecoration: 'none',
-                    transition: 'all 0.3s ease',
-                    opacity: 1,
-                    pointerEvents: 'auto'
-                }} className="desktop-contact-btn"
-                    onMouseOver={(e) => {
-                        e.target.style.borderColor = '#ff4d4d';
-                        e.target.style.background = 'rgba(255,255,255,0.05)';
-                        e.target.style.color = '#ff4d4d';
+
+
+                    {/* Contact/Connect Button (Optional based on image having "Connect") */}
+                    <Link to="/contact" style={{
+                        background: 'white',
+                        color: 'black',
+                        padding: '0.6rem 1.4rem',
+                        borderRadius: '50px',
+                        fontSize: '0.85rem',
+                        fontWeight: '600',
+                        textDecoration: 'none',
+                        transition: 'all 0.3s ease',
+                        boxShadow: scrolled ? '0 4px 15px rgba(255,255,255,0.2)' : 'none'
                     }}
-                    onMouseOut={(e) => {
-                        e.target.style.borderColor = 'rgba(255,255,255,0.1)';
-                        e.target.style.background = 'rgba(20, 20, 20, 0.8)';
-                        e.target.style.color = 'white';
-                    }}
-                >
-                    Contact
-                </Link>
+                        onMouseOver={(e) => {
+                            e.target.style.transform = 'translateY(-1px)';
+                            e.target.style.boxShadow = '0 6px 20px rgba(255,255,255,0.3)';
+                        }}
+                        onMouseOut={(e) => {
+                            e.target.style.transform = 'translateY(0)';
+                            e.target.style.boxShadow = scrolled ? '0 4px 15px rgba(255,255,255,0.2)' : 'none';
+                        }}
+                    >
+                        Connect
+                    </Link>
+                </div>
             </div>
 
             {/* Mobile Menu Dropdown */}
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                         style={{
-                            position: 'fixed',
-                            top: '5rem', // Below the navbar
-                            left: '1rem',
-                            right: '1rem',
-                            background: 'rgba(10, 10, 10, 0.95)',
+                            background: 'rgba(0, 0, 0, 0.95)',
                             backdropFilter: 'blur(16px)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            borderRadius: '1rem',
-                            padding: '1.5rem',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: '1rem',
-                            zIndex: 999, // Below the navbar button (1001)
-                            boxShadow: '0 10px 40px -10px rgba(0,0,0,0.5)'
+                            borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                            overflow: 'hidden'
                         }}
                     >
-                        {navItems.concat({ name: 'Contact', path: '/contact' }).map((item) => (
+                        <div style={{
+                            padding: '2rem',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '1.5rem',
+                            alignItems: 'center'
+                        }}>
+                            {navItems.map((item) => (
+                                <Link
+                                    key={item.name}
+                                    to={item.path}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    style={{
+                                        color: 'white',
+                                        textDecoration: 'none',
+                                        fontSize: '1.2rem',
+                                        fontWeight: '500'
+                                    }}
+                                >
+                                    {item.name}
+                                </Link>
+                            ))}
                             <Link
-                                key={item.name}
-                                to={item.path}
+                                to="/contact"
                                 onClick={() => setMobileMenuOpen(false)}
                                 style={{
-                                    color: isActive(item.path) ? '#ffffffff' : '#6a6a6aff',
+                                    background: 'white',
+                                    color: 'black',
+                                    padding: '0.75rem 2rem',
+                                    borderRadius: '50px',
                                     textDecoration: 'none',
-                                    fontSize: '1.1rem',
-                                    fontWeight: '500',
-                                    padding: '0.75rem',
+                                    fontWeight: '600',
                                     width: '100%',
-                                    textAlign: 'center',
-                                    borderBottom: '1px solid rgba(255,255,255,0.03)',
-                                    display: 'block'
+                                    textAlign: 'center'
                                 }}
                             >
-                                {item.name}
+                                Connect
                             </Link>
-                        ))}
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
             <style>{`
-                @media (max-width: 900px) {
+                @media (max-width: 1024px) {
                     .desktop-nav {
-                        display: none !important;
-                    }
-                    .desktop-contact-btn {
                         display: none !important;
                     }
                     .mobile-menu-btn {

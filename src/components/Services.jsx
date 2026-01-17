@@ -3,19 +3,19 @@ import { motion } from 'framer-motion';
 
 const services = [
     {
-        title: 'AI solutions for businesses',
+        title: 'Product Engineering & Enterprise SaaS Development',
         description: 'Harness the power of artificial intelligence to drive innovation and growth.',
-        image: '/ai.PNG'
+        image: '/1.png'
     },
     {
-        title: 'Immersive Web & App Experiences',
+        title: 'Cloud-Native Web & Application Engineering',
         description: 'Craft seamless, high-performance digital experiences engineered to captivate users and strengthen brand presence across platforms.',
-        image: '/web.PNG'
+        image: '/3.png'
     },
     {
-        title: 'Enterprise-Grade Data Solutions',
+        title: 'Enterprise Data, AI & Intelligent Automation',
         description: 'Enable robust data pipelines, dynamic dashboards, and predictive analytics that unlock deeper business intelligence.',
-        image: '/Screenshot 2025-11-20 133110.png'
+        image: '/2.png'
     }
 ];
 
@@ -23,7 +23,7 @@ const Services = () => {
     const [activeService, setActiveService] = useState(1);
 
     return (
-        <section id="services" className="section" style={{ background: '#000', padding: '8rem 0' }}>
+        <section id="services" className="section" style={{ background: '#000', padding: '1rem 0' }}>
             <div className="container">
                 {/* Header */}
                 <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
@@ -113,8 +113,8 @@ const Services = () => {
                                 src={services[activeService].image}
                                 alt={services[activeService].title}
                                 style={{
-                                    maxWidth: '95%',
-                                    maxHeight: '95%',
+                                    maxWidth: '100%',
+                                    maxHeight: '100%',
                                     objectFit: 'contain',
                                     zIndex: 1
                                 }}

@@ -34,16 +34,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #000; 
+  background: #000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333; 
+  background: #333;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 body {
@@ -52,14 +52,16 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased; /* Smoother fonts */
+  -webkit-font-smoothing: antialiased;
+  /* Smoother fonts */
   -moz-osx-font-smoothing: grayscale;
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s ease; /* Smoother general transition */
+  transition: all 0.3s ease;
+  /* Smoother general transition */
 }
 
 ul {

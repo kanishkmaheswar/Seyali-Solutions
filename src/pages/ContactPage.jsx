@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ContactComponent from '../components/Contact';
+import SocialLinks from '../components/SocialLinks';
 
 const ContactPage = () => {
     useEffect(() => {
@@ -7,8 +8,9 @@ const ContactPage = () => {
     }, []);
 
     return (
-        <div style={{ paddingTop: '80px', minHeight: '80vh' }}>
+        <div style={{ paddingTop: '20px', minHeight: '80vh' }}>
             <ContactComponent />
+            <SocialLinks />
         </div>
     );
 };

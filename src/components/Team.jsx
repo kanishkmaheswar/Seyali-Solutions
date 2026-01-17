@@ -19,7 +19,7 @@ const Team = () => {
     ];
 
     return (
-        <section id="team" className="section" style={{ background: '#000', padding: '6rem 0' }}>
+        <section id="team" className="section" style={{ background: '#000', padding: '4rem 0' }}>
             <div className="container">
 
                 {/* Header */}

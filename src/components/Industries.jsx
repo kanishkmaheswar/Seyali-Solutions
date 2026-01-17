@@ -28,7 +28,7 @@ const services = [
 
 const Industries = () => {
     return (
-        <section id="industries" className="section" style={{ background: '#000', padding: '8rem 0' }}>
+        <section id="industries" className="section" style={{ background: '#000', padding: '1rem 0' }}>
             <div className="container">
                 <div style={{
                     display: 'flex',
